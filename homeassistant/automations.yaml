@@ -1,0 +1,57 @@
+- id: 'lampon'
+  alias: Lamp on
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - input_button.lamp_on
+  conditions: []
+  actions:
+  - action: rest_command.power_on
+    metadata: {}
+    data: {}
+  mode: single
+
+- id: 'lampon-auto'
+  alias: Lamp on (auto)
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.dusk
+    to: "on"
+  conditions: []
+  actions:
+  - action: rest_command.power_on
+    metadata: {}
+    data: {}
+  mode: single
+
+- id: 'lampoff'
+  alias: Lamp off
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - input_button.lamp_off
+  conditions: []
+  actions:
+  - action: rest_command.power_off
+    metadata: {}
+    data: {}
+  mode: single
+
+- id: 'lampoff-auto'
+  alias: Lamp off (auto)
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.dusk
+    to: "off"
+  conditions: []
+  actions:
+  - action: rest_command.power_off
+    metadata: {}
+    data: {}
+  mode: single
