@@ -1,24 +1,36 @@
 #include <Arduino.h>
+#include <output.h>
 #include <status.h>
 #include <ESPAsyncWebServer.h>
+#include <secrets.h>
 
-StatusDisplay Status;
-
+OutputClass output;
+StatusDisplay status;
 AsyncWebServer server(80);
 
 void setup()
 {
-  Status.begin();
+  status.begin();
+  output.begin();
+
   Serial.begin(115200);
 
-  WiFi.mode(WIFI_STA);
-  WiFi.softAP("ESP32", "password");
-  WiFi.softAPConfig(IPAddress(10, 0, 0, 10), IPAddress(10, 0, 0, 201), IPAddress(255, 0, 0, 0));
+  WiFi.mode(WIFI_AP);
+  WiFi.begin(SSID, SSIDpassword);
+  WiFi.config(IPAddress(192, 168, 178, 230), IPAddress(192, 168, 178, 1), IPAddress(255, 255, 255, 0));
+
+  while (!WiFi.isConnected()) {
+    Serial.println("Connecting..");
+    
+    delay(100);
+  }
+
+  status.connected();
+
+  Serial.println(WiFi.localIP());
 
   server.on("/toggle", HTTP_POST, [&](AsyncWebServerRequest *request) {
     Serial.print("Got toggle request ");
-
-    Status.connected();
 
     if(request->hasParam("state")) {
       auto state = request->getParam("state");
@@ -28,10 +40,12 @@ void setup()
       auto isOn = state->value().equalsIgnoreCase("on");
 
       if (isOn) {
-        Status.switchedOn();
+        status.switchedOn();
+        output.switchedOn();
       }
       else {
-        Status.switchedOff();
+        status.switchedOff();
+        output.switchedOff();
       }
     }
 
@@ -41,7 +55,7 @@ void setup()
 
   server.begin();
 
-  Status.init();
+  status.init();
 }
 
 void loop()

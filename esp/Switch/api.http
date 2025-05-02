@@ -1,7 +1,7 @@
-POST http://10.0.0.10/toggle?state=on
+POST http://192.168.178.230/toggle?state=on
 
 ###
 
-POST http://10.0.0.10/toggle?state=off
+POST http://192.168.178.230/toggle?state=off
 
 ###
