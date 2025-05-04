@@ -29,6 +29,13 @@ void setup()
 
   Serial.println(WiFi.localIP());
 
+  server.on("/state", HTTP_GET, [&](AsyncWebServerRequest *request) {
+    Serial.println("Got state request ");
+
+    request->send(200, "text/plain", output.state() ? "on" : "off");
+  });
+
+
   server.on("/toggle", HTTP_POST, [&](AsyncWebServerRequest *request) {
     Serial.print("Got toggle request ");
 

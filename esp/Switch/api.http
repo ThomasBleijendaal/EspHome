@@ -5,3 +5,7 @@ POST http://192.168.178.230/toggle?state=on
 POST http://192.168.178.230/toggle?state=off
 
 ###
+
+GET http://192.168.178.230/state
+
+###

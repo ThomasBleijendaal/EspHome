@@ -12,10 +12,10 @@ scene: !include scenes.yaml
 
 rest_command:
   power_on:
-    url: "http://10.0.0.10/toggle?state=on"
+    url: "http://192.168.178.230/toggle?state=on"
     method: post
   power_off:
-    url: "http://10.0.0.10/toggle?state=off"
+    url: "http://192.168.178.230/toggle?state=off"
     method: post
 
 binary_sensor:
@@ -26,3 +26,6 @@ binary_sensor:
     before: sunset
     before_offset: "1:30"
     unique_id: dusk_sensor
+  - platform: rest
+    name: LampState
+    resource: http://192.168.178.230/state
