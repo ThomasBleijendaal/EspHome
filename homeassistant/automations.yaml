@@ -1,57 +1,95 @@
-- id: 'lampon'
+- id: "lampon"
   alias: Lamp on
-  description: ''
+  description: ""
   triggers:
-  - trigger: state
-    entity_id:
-    - input_button.lamp_on
+    - trigger: state
+      entity_id:
+        - input_button.schuur_lamp_aan
   conditions: []
   actions:
-  - action: rest_command.power_on
-    metadata: {}
-    data: {}
+    - action: rest_command.power_on
+      metadata: {}
+      data: {}
   mode: single
 
-- id: 'lampon-auto'
-  alias: Lamp on (auto)
-  description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - binary_sensor.dusk
-    to: "on"
-  conditions: []
-  actions:
-  - action: rest_command.power_on
-    metadata: {}
-    data: {}
-  mode: single
-
-- id: 'lampoff'
+- id: "lampoff"
   alias: Lamp off
-  description: ''
+  description: ""
   triggers:
-  - trigger: state
-    entity_id:
-    - input_button.lamp_off
+    - trigger: state
+      entity_id:
+        - input_button.schuur_lamp_uit
   conditions: []
   actions:
-  - action: rest_command.power_off
-    metadata: {}
-    data: {}
+    - action: rest_command.power_off
+      metadata: {}
+      data: {}
   mode: single
 
-- id: 'lampoff-auto'
-  alias: Lamp off (auto)
-  description: ''
+- id: "lamplow"
+  alias: Lamp low
+  description: ""
   triggers:
-  - trigger: state
-    entity_id:
-    - binary_sensor.dusk
-    to: "off"
+    - trigger: state
+      entity_id:
+        - input_button.schuur_lamp_laag
   conditions: []
   actions:
-  - action: rest_command.power_off
-    metadata: {}
-    data: {}
+    - action: rest_command.brightness_low
+      metadata: {}
+      data: {}
+    - action: rest_command.power_on
+      metadata: {}
+      data: {}
+  mode: single
+
+- id: "lampmid"
+  alias: Lamp mid
+  description: ""
+  triggers:
+    - trigger: state
+      entity_id:
+        - input_button.schuur_lamp_mid
+  conditions: []
+  actions:
+    - action: rest_command.brightness_mid
+      metadata: {}
+      data: {}
+    - action: rest_command.power_on
+      metadata: {}
+      data: {}
+  mode: single
+
+- id: "lamphigh"
+  alias: Lamp high
+  description: ""
+  triggers:
+    - trigger: state
+      entity_id:
+        - input_button.schuur_lamp_hoog
+  conditions: []
+  actions:
+    - action: rest_command.brightness_high
+      metadata: {}
+      data: {}
+    - action: rest_command.power_on
+      metadata: {}
+      data: {}
+  mode: single
+
+- id: "lampfull"
+  alias: Lamp full
+  description: ""
+  triggers:
+    - trigger: state
+      entity_id:
+        - input_button.schuur_lamp_vol
+  conditions: []
+  actions:
+    - action: rest_command.brightness_full
+      metadata: {}
+      data: {}
+    - action: rest_command.power_on
+      metadata: {}
+      data: {}
   mode: single

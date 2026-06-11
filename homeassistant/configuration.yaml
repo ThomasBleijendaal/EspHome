@@ -17,6 +17,18 @@ rest_command:
   power_off:
     url: "http://192.168.178.230/toggle?state=off"
     method: post
+  brightness_low:
+    url: "http://192.168.178.230/brightness?value=10"
+    method: post
+  brightness_mid:
+    url: "http://192.168.178.230/brightness?value=30"
+    method: post
+  brightness_high:
+    url: "http://192.168.178.230/brightness?value=60"
+    method: post
+  brightness_full:
+    url: "http://192.168.178.230/brightness?value=255"
+    method: post
 
 binary_sensor:
   - platform: tod

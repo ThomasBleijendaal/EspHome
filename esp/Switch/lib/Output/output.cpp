@@ -2,11 +2,12 @@
 #include <output.h>
 
 int pin = 14;
+int brightness = 128;
 bool pinState = false;
 
 void OutputClass::begin() {
     pinMode(pin, OUTPUT);
-    digitalWrite(pin, LOW);
+    analogWrite(pin, 0);
     pinState = false;
 }
 
@@ -14,12 +15,16 @@ bool OutputClass::state() {
     return pinState;
 }
 
+void OutputClass::setBrightness(int value) {
+    brightness = (int)value;
+}
+
 void OutputClass::switchedOn() {
-    digitalWrite(pin, HIGH);
+    analogWrite(pin, brightness);
     pinState = true;
 }
 
 void OutputClass::switchedOff() {
-    digitalWrite(pin, LOW);
+    analogWrite(pin, 0);
     pinState = false;
 }

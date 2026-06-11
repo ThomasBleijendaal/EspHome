@@ -15,7 +15,7 @@ void setup()
 
   Serial.begin(115200);
 
-  WiFi.mode(WIFI_AP);
+  WiFi.mode(WIFI_STA);
   WiFi.begin(SSID, SSIDpassword);
   WiFi.config(IPAddress(192, 168, 178, 230), IPAddress(192, 168, 178, 1), IPAddress(255, 255, 255, 0));
 
@@ -35,6 +35,26 @@ void setup()
     request->send(200, "text/plain", output.state() ? "on" : "off");
   });
 
+  server.on("/brightness", HTTP_POST, [&](AsyncWebServerRequest *request) {
+    Serial.print("Got brightness request ");
+
+    if(request->hasParam("value")) {
+      auto value = request->getParam("value");
+      
+      Serial.print(value->value());
+
+      auto brightness = value->value().toInt();
+      
+      Serial.print(" parsed to ");
+
+      Serial.print(brightness);
+
+      output.setBrightness(brightness);
+    }
+
+    Serial.println();
+    request->send(200);
+  });
 
   server.on("/toggle", HTTP_POST, [&](AsyncWebServerRequest *request) {
     Serial.print("Got toggle request ");

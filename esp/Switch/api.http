@@ -6,6 +6,22 @@ POST http://192.168.178.230/toggle?state=off
 
 ###
 
+POST http://192.168.178.230/brightness?value=10
+
+###
+
+POST http://192.168.178.230/brightness?value=30
+
+###
+
+POST http://192.168.178.230/brightness?value=60
+
+###
+
+POST http://192.168.178.230/brightness?value=255
+
+###
+
 GET http://192.168.178.230/state
 
 ###
