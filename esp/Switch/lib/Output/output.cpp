@@ -5,9 +5,21 @@ int pin = 14;
 int brightness = 128;
 bool pinState = false;
 
-void OutputClass::begin() {
+void setOff(int pin) {
+    ledcDetachPin(pin);
+
     pinMode(pin, OUTPUT);
-    analogWrite(pin, 0);
+    digitalWrite(pin, LOW);
+}
+
+void setOutput(int pin, int value) {
+    pinMode(pin, OUTPUT);
+    analogWrite(pin, value);
+}
+
+void OutputClass::begin() {
+    setOff(pin);
+
     pinState = false;
 }
 
@@ -20,11 +32,12 @@ void OutputClass::setBrightness(int value) {
 }
 
 void OutputClass::switchedOn() {
-    analogWrite(pin, brightness);
+    setOutput(pin, brightness);
     pinState = true;
 }
 
 void OutputClass::switchedOff() {
-    analogWrite(pin, 0);
+    setOff(pin);
     pinState = false;
 }
+
